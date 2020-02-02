@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63053613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1757932, y: -0.12658668, z: -20}
+  m_LocalPosition: {x: -4.1989393, y: -0.105694056, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1392,7 +1392,7 @@ PrefabInstance:
     - target: {fileID: 8786629852722199186, guid: 4120a0d124b245845bda933ae2d5018e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8786629852722199186, guid: 4120a0d124b245845bda933ae2d5018e,
         type: 3}
@@ -1418,6 +1418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorAB
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786629853855087719, guid: 4120a0d124b245845bda933ae2d5018e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4120a0d124b245845bda933ae2d5018e, type: 3}
@@ -1833,7 +1838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018453158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5209723, y: 1.05213, z: -20}
+  m_LocalPosition: {x: -5.5209727, y: 1.05213, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 375863434}

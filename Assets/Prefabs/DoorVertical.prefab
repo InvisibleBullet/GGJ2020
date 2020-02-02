@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3356887738056472583}
   - component: {fileID: 3356887738056472582}
   m_Layer: 8
-  m_Name: DoorBC
+  m_Name: DoorVertical
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3356887738559512376}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3356887738056472581}
