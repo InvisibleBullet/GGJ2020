@@ -14,7 +14,10 @@ public class Door : MonoBehaviour
 
     public bool isHorizontal;
 
+    public ParticleSystem waterParticles;
+
     void Awake() {
+        waterParticles = GetComponentInChildren<ParticleSystem>();
         BoxCollider2D doorBox = gameObject.GetComponent<BoxCollider2D>();
         // Setting door values from its BoxCollider
         if (isHorizontal) {
@@ -80,5 +83,57 @@ public class Door : MonoBehaviour
 
         fromTemp.UpdateWater(-water);
         toTemp.UpdateWater(water);
+
+        ManageWaterParticles(fromTemp, toTemp, water);
+    }
+
+    void ManageWaterParticles(Room from, Room to, float water) {
+
+        if (!isHorizontal) {
+            CalculateNewWaterHeight(from);
+
+            Vector2 direction = to.transform.position - from.transform.position;
+
+            Quaternion newRotation;
+            if (direction.x < 0) {
+                newRotation = Quaternion.Euler(waterParticles.transform.rotation.x, -90, waterParticles.transform.rotation.z);
+                waterParticles.transform.rotation = newRotation;
+            } else {
+                newRotation = Quaternion.Euler(waterParticles.transform.rotation.x, 90, waterParticles.transform.rotation.z);
+                waterParticles.transform.rotation = newRotation;
+            }
+        }
+        var emitParams = new ParticleSystem.EmitParams();
+        int emitValue = Mathf.RoundToInt(water * 100);
+        if (emitValue < 1) {
+            emitValue = 1;
+        }
+        waterParticles.Emit(emitParams, emitValue);
+    }
+
+    void CalculateNewWaterHeight(Room from) {
+        /* What do we need here:
+
+        1) Door lower bound
+        2) Door center
+        3) If water level lower than door center, approximate
+        4) Otherwise, set to door center
+        */
+
+        float height = from == RoomA ? RoomAHeight : RoomBHeight;
+        Vector2 newWaterHeight;
+        BoxCollider2D doorBox = gameObject.GetComponent<BoxCollider2D>();
+        float absWaterHeight = from.roomBottomLine + from.waterHeight;
+        float doorCenterHeight = doorBox.bounds.center.y;
+        if (absWaterHeight < doorCenterHeight) {
+            // Take middle value between door lower bound and absolute water level
+            float doorLowPoint = doorBox.bounds.center.y - doorBox.bounds.size.y / 2;
+            float newWaterHeightY = absWaterHeight;
+            newWaterHeight = new Vector3(waterParticles.transform.position.x, newWaterHeightY);
+        } else {
+            newWaterHeight = new Vector3(waterParticles.transform.position.x, doorCenterHeight);
+        }
+        
+        waterParticles.transform.position = newWaterHeight;
     }
 }

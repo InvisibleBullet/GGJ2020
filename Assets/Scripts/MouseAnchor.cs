@@ -10,7 +10,6 @@ public class MouseAnchor : MonoBehaviour
         // Get main camera screen to world point, move anchor there
         Vector3 zFixedPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(zFixedPos);
-        Debug.Log(worldPos);
         transform.position = worldPos;
     }
 
