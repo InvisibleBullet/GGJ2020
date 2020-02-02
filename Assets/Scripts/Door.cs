@@ -21,7 +21,7 @@ public class Door : MonoBehaviour
         BoxCollider2D doorBox = gameObject.GetComponent<BoxCollider2D>();
         // Setting door values from its BoxCollider
         if (isHorizontal) {
-            throughput = doorBox.bounds.size.x;
+            throughput = doorBox.bounds.size.x * 3;
         }
         else {
             throughput = doorBox.bounds.size.y;
@@ -108,7 +108,12 @@ public class Door : MonoBehaviour
         if (emitValue < 1) {
             emitValue = 1;
         }
-        waterParticles.Emit(emitParams, emitValue);
+
+        BoxCollider2D doorBox = gameObject.GetComponent<BoxCollider2D>();
+        float absWaterHeight = to.roomBottomLine + to.waterHeight;
+        float doorTopHeight = doorBox.bounds.center.y + doorBox.bounds.size.y/2;
+        if (doorTopHeight > absWaterHeight)
+            waterParticles.Emit(emitParams, emitValue);
     }
 
     void CalculateNewWaterHeight(Room from) {
