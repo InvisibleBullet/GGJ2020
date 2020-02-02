@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 7179437429681085193}
   m_Layer: 0
   m_Name: HolePrefab
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

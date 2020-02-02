@@ -21,6 +21,22 @@ public class Hole : MonoBehaviour
         if (room && !isClosed) {
             room.UpdateWater(rate * Time.deltaTime * 3);
         }
+
+        BoxCollider2D col2d = gameObject.GetComponent<BoxCollider2D>();
+        Collider2D[] grabObjects = new Collider2D[10];
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(LayerMask.GetMask("GrabObject"));
+        col2d.OverlapCollider(contactFilter, grabObjects);
+
+        //Debug.Log(grabObjects[0]);
+        foreach (Collider2D grabObject in grabObjects) {
+            Debug.Log(grabObject);
+            if (grabObject) {
+                bool isGrabObject = (bool)grabObject.gameObject.GetComponent<GrabObject>();
+                isClosed = isGrabObject ? true : isClosed;
+            }
+            
+        }
     }
 
     private Room GetRoom()
