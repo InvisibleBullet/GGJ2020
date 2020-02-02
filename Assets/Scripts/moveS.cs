@@ -22,6 +22,8 @@ public class moveS : MonoBehaviour
     public GameObject ripMenuUI;
 
     public Vector3 playerScale;
+
+    public float waterDamageCooldown = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,7 +39,7 @@ public class moveS : MonoBehaviour
         line.SetPosition(1, graber.transform.position);
         line.startWidth = 0.1f;
         if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("MainScene");
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
@@ -91,9 +93,23 @@ public class moveS : MonoBehaviour
 
         }
     }
+
+    void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.tag == "Water") {
+            Debug.Log("colliding with water");
+            if (waterDamageCooldown == 0) {
+                Damage(1);
+            } 
+            waterDamageCooldown += Time.deltaTime;
+            if (waterDamageCooldown >= 1) {
+                waterDamageCooldown = 0;
+            }
+        }
+    }
     
     void Damage (int damage)
     {
         HP -= damage;
+        Debug.Log(HP);
     }
 }
