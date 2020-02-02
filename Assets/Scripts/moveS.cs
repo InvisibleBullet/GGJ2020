@@ -21,7 +21,7 @@ public class moveS : MonoBehaviour
     public int HP;
     public GameObject ripMenuUI;
 
-    public Transform mouseAnchor;
+    public Vector3 playerScale;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,12 +54,30 @@ public class moveS : MonoBehaviour
                 joint.distance = 1;
         }
 
-        difference = mouseAnchor.position - transform.position;
-        mousePosition = mouseAnchor.position;
+        difference = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
         direction = (mousePosition - transform.position).normalized;
 
         rb.velocity = new Vector2(difference.x * moveSpeed, difference.y * moveSpeed);
 
+        playerScale = transform.localScale;
+        if (rb.velocity.x >= 0)
+        {
+            playerScale.x = 1;
+            transform.localScale = playerScale;
+        }
+        else if (rb.velocity.x < 0)
+        {
+            playerScale.x = -1;
+            transform.localScale = playerScale;
+        }
+
+        if (difference.x >= 2 || difference.x <= -2)
+            gameObject.GetComponent<Animator>().SetFloat("run", difference.x);
+        else if (difference.y >= 2 || difference.y <= -2)
+            gameObject.GetComponent<Animator>().SetFloat("run", difference.y);
+        else
+            gameObject.GetComponent<Animator>().SetFloat("run", difference.x);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
