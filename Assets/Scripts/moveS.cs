@@ -20,6 +20,8 @@ public class moveS : MonoBehaviour
     public Vector3 diff;
     public int HP;
     public GameObject ripMenuUI;
+
+    public Transform mouseAnchor;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,8 +54,8 @@ public class moveS : MonoBehaviour
                 joint.distance = 1;
         }
 
-        difference = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+        difference = mouseAnchor.position - transform.position;
+        mousePosition = mouseAnchor.position;
         direction = (mousePosition - transform.position).normalized;
 
         rb.velocity = new Vector2(difference.x * moveSpeed, difference.y * moveSpeed);
