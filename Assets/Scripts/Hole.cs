@@ -28,15 +28,16 @@ public class Hole : MonoBehaviour
         contactFilter.SetLayerMask(LayerMask.GetMask("GrabObject"));
         col2d.OverlapCollider(contactFilter, grabObjects);
 
+        bool isGrabObjectCollided = false;
         //Debug.Log(grabObjects[0]);
         foreach (Collider2D grabObject in grabObjects) {
             Debug.Log(grabObject);
-            if (grabObject) {
-                bool isGrabObject = (bool)grabObject.gameObject.GetComponent<GrabObject>();
-                isClosed = isGrabObject ? true : isClosed;
-            }
-            
+            bool isGrabObject = grabObject
+                ? (bool) grabObject.gameObject.GetComponent<GrabObject>()
+                : false;
+            isGrabObjectCollided = isGrabObject ? true : isGrabObjectCollided;
         }
+        isClosed = isGrabObjectCollided;
     }
 
     private Room GetRoom()
