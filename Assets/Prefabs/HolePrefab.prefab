@@ -123,6 +123,7 @@ MonoBehaviour:
   room: {fileID: 0}
   rate: 2
   isClosed: 0
+  waterFlow: {fileID: 8379659336825983491}
 --- !u!1 &7179437429681085192
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class Hole : MonoBehaviour
 
     public bool isClosed = false;
 
+    public ParticleSystem waterFlow;
+
     void Awake()
     {
         room = GetRoom();
@@ -20,6 +22,12 @@ public class Hole : MonoBehaviour
     {
         if (room && !isClosed) {
             room.UpdateWater(rate * Time.deltaTime * 3);
+            var emitParams = new ParticleSystem.EmitParams();
+            int emitValue = Mathf.RoundToInt(rate * Time.deltaTime * 3 * 100);
+            if (emitValue < 1) {
+                emitValue = 1;
+            }
+            waterFlow.Emit(emitParams, emitValue);
         }
 
         BoxCollider2D col2d = gameObject.GetComponent<BoxCollider2D>();
